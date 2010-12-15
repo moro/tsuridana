@@ -1,8 +1,8 @@
 require 'rubygems'
-require 'spec/rake/spectask'
+require 'rspec/core/rake_task'
 
 task :default => :spec
-Spec::Rake::SpecTask.new do |t|
-  t.spec_opts = %w[--color]
+RSpec::Core::RakeTask.new do |t|
+  t.rspec_opts = %w[--color]
 end
 
