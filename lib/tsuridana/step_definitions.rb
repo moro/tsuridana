@@ -1,19 +1,28 @@
 # coding: utf-8
 require 'ripper'
+require 'yaml'
 
 module Tsuridana
   class StepDefinitions < Ripper::Filter
     StepDefinition = Struct.new(:keyword, :re_src, :lino)
     attr_reader :step_definitions, :src
 
-    CUCUMBER_KEYWORDS = [
-      [:en, %w[Given When Then And]]
-    ].freeze
+    def self.cucumber_keywords
+      return @keywords if @keywords
+
+      # XXX refactor
+      source = Dir[File.expand_path("../vendor/gherkin-*-i18n.yml", File.dirname(__FILE__))].last
+      keywords = YAML.load_file(source).inject([]) { |keywords, (lang, gherkin_keywords)|
+        keywords << %w[given when then].map{|n| gherkin_keywords[n].split('|') }
+      }.flatten.each{|k| k.gsub!(/\<\z/, '') }.uniq
+      keywords.delete('*')
+      @keywords = keywords
+    end
 
     def initialize(path, additional_keywords = [], filename = '-', lineno = 1)
       super(File.read(path), filename, lineno)
       @src = path
-      @keywords = CUCUMBER_KEYWORDS.assoc(:en).last + additional_keywords
+      @keywords = (self.class.cucumber_keywords.dup + additional_keywords).uniq
       @step_definitions = []
     end
 

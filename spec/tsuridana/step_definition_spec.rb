@@ -3,6 +3,10 @@ require_relative "../spec_helper"
 require "tsuridana/step_definitions"
 
 describe Tsuridana::StepDefinitions do
+  describe '.cucumber_keywords' do
+    subject { Tsuridana::StepDefinitions.cucumber_keywords }
+    it { should_not be_empty }
+  end
   context ".new('spec/fixtures/cucumber_steps')" do
     before do
       @step_defs = Tsuridana::StepDefinitions.new(
