@@ -3,4 +3,5 @@
 $:.unshift File.expand_path("../lib", File.dirname(__FILE__))
 require 'tsuridana/runner/unite'
 
-Tsuridana::Runner::Unite.run(*ARGV)
+dir = ARGV.first || "./features/step_definitions"
+Tsuridana::Runner::Unite.run(*Dir.glob("#{dir}/**/*.rb"))

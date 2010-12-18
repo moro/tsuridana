@@ -22,7 +22,7 @@ module Tsuridana
 
       def display
         steps.each do |step|
-          puts "#{filter(step.re_src)}\t:edit +#{step.lino} #{@step_definitions.src}"
+          puts "#{filter(step.re_src)}\t#{@step_definitions.src}\t#{step.lino}"
         end
       end
 
