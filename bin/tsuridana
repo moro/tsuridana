@@ -1,0 +1,8 @@
+# coding: utf-8
+# vim:set ft=ruby:
+$:.unshift File.expand_path("../lib", File.dirname(__FILE__))
+require 'tsuridana/runner/humanize'
+
+dir = ARGV.first || "./features/step_definitions"
+Tsuridana::Runner::Humanize.run(*Dir.glob("#{dir}/**/*.rb"))
+
