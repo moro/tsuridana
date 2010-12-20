@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["MOROHASHI Kyosuke"]
   s.email       = ["moronatural@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{parses cucumber's step_definitions.}
-  s.description = %q{}
+  s.summary     = %q{parses and show cucumber's step_definitions.}
+  s.description = %q{helps your Cucumber to grow up.}
 
   s.rubyforge_project = "tsuridana"
 
